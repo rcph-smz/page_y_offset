@@ -1,0 +1,3 @@
+- const {this,class,return,functions,inside,object} = new ScrollEvent()
+
+- page_y_offset(element) : return properties of element position
