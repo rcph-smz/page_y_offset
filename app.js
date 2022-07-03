@@ -29,9 +29,11 @@ function findElementByQuery(...queries) {
 function randint(min,max) {
     return Math.floor(Math.random() * (max - min)) + min
 }
+
 window.addEventListener("scroll",() => {
     findElementByQuery(".activity","#activity",".footer").forEach(val => {
         val.style.backgroundColor = `rgba(${randint(0,244)},${randint(0,244)},${randint(0,244)},0.7)`
+        val.style.left = `${randint(-innerWidth / 4,innerWidth / 4)}px`
     })
 })
 
