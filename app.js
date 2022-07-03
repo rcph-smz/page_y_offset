@@ -36,7 +36,6 @@ window.addEventListener("scroll",() => {
 })
 
 
-
 function pageYOffset(element) {
 
 }
