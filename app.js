@@ -6,8 +6,13 @@ class ScrollEvent {
     pageY_Offset(...elements) {
         const off_set = []
         for(const element of elements){
-            for(const e of element){
-                off_set.push(e.getBoundingClientRect().top)
+            try {
+                for(const e of element){
+                    off_set.push(e.getBoundingClientRect().top)
+                }
+            }
+            catch (err) {
+                off_set.push(element.getBoundingClientRect().top)
             }
         }
         const combine_off_set = []
@@ -21,6 +26,7 @@ class ScrollEvent {
         }
         return combine_off_set
     }
+    
 }
 
 class Query {
@@ -63,11 +69,27 @@ class Query {
                     })
                 }
                 else {
-    
                     combine_list.forEach((query) => {
                         query.style.borderStyle = ``
                         query.style.borderColor = ``
                     })
+                }
+            },
+            findByIndex(index) {
+                return {
+                    getQuery() {
+                        return combine_list[index]
+                    },
+                    gizmos(condition = false,borderColor = "#87ceeb") {
+                        if(condition) {
+                            combine_list[index].style.borderStyle = `solid`
+                            combine_list[index].style.borderColor = borderColor
+                        }
+                        else {
+                            combine_list[index].style.borderStyle = ``
+                            combine_list[index].style.borderColor = ``
+                        }
+                    }
                 }
             }
         }
@@ -83,9 +105,13 @@ class Random {
     }
 }
 
-const query = new Query
+const query = new Query()
+const scrollEvent = new ScrollEvent()
 
-query.findElementByQuery(".activity").getQuery()
+window.addEventListener("scroll",() => {
+    console.log(scrollEvent.pageY_Offset(query.findElementByQuery(".activity").getQuery()))
+})
+
 // query.findElementByQuery(".activity").gizmos(true)
 
 
