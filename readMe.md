@@ -2,11 +2,11 @@
 
 * ex: parallax,locomotion , etc (just don't read this i feel embarassed)
 
-# functions
+# classes / function
 
 - **findElementByQuery(".activity")** : return list of query
 
 - **randint()** : similar to randint from python
 
-- 
+- **pageY_Offset()** : find the top offset
 
