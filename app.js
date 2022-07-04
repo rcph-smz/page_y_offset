@@ -1,4 +1,11 @@
 
+class ScrollEvent {
+    
+}
+
+function randint(min,max) {
+    return Math.floor(Math.random() * (max - min)) + min
+}
 
 function findElementByQuery(...queries) {
     const query_ext = ["\.","#","[","]"]
@@ -26,18 +33,30 @@ function findElementByQuery(...queries) {
     }
     return combine_list
 }
-function randint(min,max) {
-    return Math.floor(Math.random() * (max - min)) + min
-}
 
-window.addEventListener("scroll",() => {
-    findElementByQuery(".activity","#activity",".footer").forEach(val => {
-        val.style.backgroundColor = `rgba(${randint(0,244)},${randint(0,244)},${randint(0,244)},0.7)`
-        val.style.left = `${randint(-innerWidth / 4,innerWidth / 4)}px`
-    })
-})
+// window.addEventListener("scroll",() => {
+//     findElementByQuery(".activity","#activity",".footer").forEach(val => {
+//         val.style.backgroundColor = `rgba(${randint(0,244)},${randint(0,244)},${randint(0,244)},0.7)`
+//         val.style.left = `${randint(-innerWidth / 4,innerWidth / 4)}px`
+//     })
+// })
 
 
-function pageYOffset(element) {
-
+function pageY_Offset(...elements) {
+    const off_set = []
+    for(element of elements){
+        for(e of element){
+            off_set.push(e.getBoundingClientRect().top)
+        }
+    }
+    const combine_off_set = []
+    for(o of off_set){
+        try {
+            combine_off_set.push(...o)
+        }
+        catch (err) {
+            combine_off_set.push(o)
+        }
+    }
+    return combine_off_set
 }
