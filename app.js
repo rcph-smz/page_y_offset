@@ -107,10 +107,16 @@ class Random {
 
 const query = new Query()
 const scrollEvent = new ScrollEvent()
+const randint = new Random()
+
+const activities = query.findElementByQuery(".activity").getQuery()
 
 window.addEventListener("scroll",() => {
-    console.log(scrollEvent.pageY_Offset(query.findElementByQuery(".activity").getQuery()))
+    activities.forEach(activity => {
+        activity.style.left = `${randint.randint(-innerWidth / 4, innerHeight / 4)}px`
+    })
 })
+
 
 // query.findElementByQuery(".activity").gizmos(true)
 
