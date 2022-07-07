@@ -3,6 +3,11 @@ class ScrollEvent {
     constructor () {
 
     }
+    body = document.body
+    html = document.documentElement
+
+    max_height = Math.max( this.body.scrollHeight, this.body.offsetHeight, this.html.clientHeight, this.html.scrollHeight, this.html.offsetHeight)
+
     pageY_Offset(...elements) {
         const off_set = []
         for(const element of elements){
@@ -25,6 +30,9 @@ class ScrollEvent {
             }
         }
         return combine_off_set
+    }
+    pageObserve(off_set) {
+        return off_set
     }
     
 }
@@ -108,12 +116,22 @@ class Random {
 const query = new Query()
 const scrollEvent = new ScrollEvent()
 const randint = new Random()
+const page_observe = new ScrollEvent()
 
 const activities = query.findElementByQuery(".activity").getQuery()
 
 window.addEventListener("scroll",() => {
-    activities.forEach(activity => {
-        activity.style.left = `${randint.randint(-innerWidth / 4, innerHeight / 4)}px`
+    activities.forEach(act => {
+        console.log(scrollEvent.pageY_Offset(act)[0] + (innerHeight - (innerHeight / 4)))
+        if(scrollEvent.pageY_Offset(act)[0] < (innerHeight - (innerHeight / 4))) {
+            act.style.left = 0
+        }
+        if(scrollEvent.pageY_Offset(act)[0] < (innerHeight / 4)) {
+            act.style.left = `100%`
+        }
+        else if(scrollEvent.pageY_Offset(act)[0] > (innerHeight - (innerHeight / 4))) {
+            act.style.left = `100%`
+        }
     })
 })
 
